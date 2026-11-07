@@ -4,7 +4,7 @@ import re
 PREFIX = "https://en.wikipedia.org/wiki/"
 
 def scrape_article(page, url):
-    page.goto(url)
+    page.goto(url, wait_until="domcontentloaded")
     title = page.locator("#firstHeading").inner_text()
     paragraphs = page.locator(".mw-parser-output > section > p").all_inner_texts()
     links = page.locator(".mw-parser-output > section > p a").evaluate_all("el => el.map(e => e.href)")
